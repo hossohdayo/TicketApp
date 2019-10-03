@@ -1,0 +1,29 @@
+<h1>チケット登録</h1>
+<p>チケット情報を入力してください</p>
+<% if @ticket.errors.any? %>
+  <ul>
+  <% @ticket.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+<%= form_for(@ticket, url:{controller: 'ticket', action: 'create'}) do |form| %>
+  <table class="table">
+    <tr><th>日付</th>
+      <td><%= form.date_field :game_date %></td></tr>
+    <tr><th>相手</th>
+      <td><%= form.text_field :opponent %></td></tr>
+    <tr><th>コメント</th>
+      <td><%= form.text_field :comment %></td></tr>
+    <tr><th>値段</th>
+      <td><%= form.number_field :price, min:0, max: 1000000, step: 100 %></td></tr>
+    <tr><th>場所</th>
+      <td><%= form.text_field :place %></td></tr>
+    <tr><th>ユーザ名</th>
+      <td><%= form.hidden_field :user_id, :value => @usr.id %><%= @usr.name %></td></tr>
+    <tr><th></th>
+      <td><%= form.submit("送信", class: "btn btn-primary btn-lg btn-block") %></td></tr>
+    <tr><th></th>
+      <td><%= link_to("一覧に戻る", "index") %></td></tr>
+  </table>
+<% end %>

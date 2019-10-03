@@ -1,0 +1,33 @@
+<h1>いいね一覧</h1>
+<p>いいねしたチケットの一覧です</p>
+<table class="table">
+  <tr>
+    <th>日付</th><th>相手</th><th>値段</th><th>場所</th><th>コメント</th><th>ユーザ名</th>
+  </tr>
+  <% if @like != nil then %>
+  <% @like.each do |obj| %>
+    <tr>
+      <td><%= obj.game_date %></td>
+      <td><%= obj.opponent %></td>
+      <td><%= obj.price %></td>
+      <td><%= obj.place %></td>
+      <td><%= obj.comment %></td>
+      <td><%= obj.name %></td>
+    </tr>
+  <% end %>
+  <% end %>
+</table>
+<table class="table">
+  <tr>
+      <th>ID</th>
+      <th>ユーザID</th>
+      <th>チケットID</th>
+  </tr>
+  <% @like.each do |like| %>
+    <tr>
+      <td><%= like.id %></td>
+      <td><%= like.user_id %></td>
+      <td><%= like.ticket_id %></td>
+    </tr>
+  <% end %>
+</table>

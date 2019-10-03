@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_date: 2019-09-23
+  opponent: MyString
+  comment: MyString
+  price: 1
+  place: MyString
+  user_id: 1
+
+two:
+  game_date: 2019-09-23
+  opponent: MyString
+  comment: MyString
+  price: 1
+  place: MyString
+  user_id: 1

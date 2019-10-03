@@ -1,0 +1,25 @@
+<h1>チケット一覧</h1>
+<p>全チケットの一覧です</p>
+<p><%= link_to("チケット登録", "new", class: "btn btn-primary btn-lg btn-block") %></p>
+<table class="table">
+  <tr>
+      <th>日付<%= sort_asc("game_date") %><%= sort_desc("game_date") %></th>
+      <th>相手<%= sort_asc("opponent") %><%= sort_desc("opponent") %></th>
+      <th>値段<%= sort_asc("price") %><%= sort_desc("price") %></th>
+      <th>場所<%= sort_asc("place") %><%= sort_desc("place") %></th>
+      <th>コメント</th>
+      <th>ユーザ名<%= sort_asc("user_id") %><%= sort_desc("user_id") %></th>
+      <th></th>
+  </tr>
+  <% @ticket.each do |ticket| %>
+    <tr>
+      <td><%= ticket.game_date %></td>
+      <td><%= ticket.opponent %></td>
+      <td><%= ticket.price %>円</td>
+      <td><%= ticket.place %></td>
+      <td><%= ticket.comment %></td>
+      <td><%= ticket.name %></td>
+      <td><a href="/ticket/<%= ticket.id %>">詳細</a></td>
+    </tr>
+  <% end %>
+</table>

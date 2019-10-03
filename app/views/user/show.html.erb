@@ -1,0 +1,36 @@
+<h1>ユーザー情報</h1>
+<p>ユーザーの詳細情報です</p>
+<p><%= link_to("ユーザー一覧に戻る", "index", class: "btn btn-primary") %></p>
+<table class="table">
+  <tr>
+      <th>ID</th><th>name</th><th>email</th><th>comment</th>
+  </tr>
+  <tr>
+    <td><%= @user.id %></td>
+    <td><%= @user.name %></td>
+    <td><%= @user.email %></td>
+    <td><%= @user.comment %></td>
+    <% if @usr.id == @user.id %>
+      <td><%= link_to("編集", "edit/#{@user.id}") %></td>
+      <td><%= link_to("削除", "destroy/#{@user.id}", method: :delete) %></td>
+    <% end %>
+  </tr>
+</table>
+<table class="table">
+  <tr>
+    <th>ID</th><th>日付</th><th>相手</th><th>値段</th><th>場所</th><th>コメント</th><th>ユーザ名</th>
+  </tr>
+  <% if @user.tickets != nil then %>
+    <% @user.tickets.each do |obj| %>
+      <tr>
+        <td><%= obj.id %></td>
+        <td><%= obj.game_date %></td>
+        <td><%= obj.opponent %></td>
+        <td><%= obj.price %></td>
+        <td><%= obj.place %></td>
+        <td><%= obj.comment %></td>
+        <td><%= @user.name %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

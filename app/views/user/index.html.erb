@@ -1,0 +1,14 @@
+<h1>ユーザー一覧</h1>
+<p>全ユーザーの一覧です</p>
+<table class="table">
+  <tr>
+      <th>name</th><th>comment</th><th></th>
+  </tr>
+  <% @user.each do |user| %>
+    <tr>
+      <td><%= user.name %></td>
+      <td><%= user.comment %></td>
+      <td><a href="/user/<%= user.id %>">詳細</a></td>
+    </tr>
+  <% end %>
+</table>
