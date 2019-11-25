@@ -1,0 +1,75 @@
+version: "3.7"
+
+services:
+  # Railsのサンプルアプリケーション
+  app:
+    build: .
+
+    # プロセスが正しく後始末されるようにする
+    init: true
+    # byebugのために端末を接続しておく
+    stdin_open: true
+    tty: true
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      # appコンテナではSpringを無効にする
+      - DISABLE_SPRING=1
+# 以下３行追加
+      - DB_USERNAME=root
+      - DB_PASSWORD=xxxxxxxxxx
+      - DB_HOST=docker.for.mac.localhost
+      # webpackのアセットをwebpack-dev-serverから取得する
+      - WEBPACKER_DEV_SERVER_HOST=webpack
+      - WEBPACKER_DEV_SERVER_PUBLIC=localhost:3035
+
+    volumes:
+      - .:/app
+      # node_modulesはイメージにあるものを使う
+      - /app/node_modules
+
+  # Springサーバー
+  spring:
+    build: .
+
+    command: spring server
+    entrypoint: /docker-entrypoint-spring.sh
+
+    # プロセスが正しく後始末されるようにする
+    init: true
+
+    # spring statusやspring stopが正しく動作するようにする
+    pid: host
+
+    environment:
+      - SPRING_SOCKET=/tmp/spring/spring.sock
+
+    volumes:
+      - .:/app
+      # node_modulesはイメージにあるものを使う
+      - /app/node_modules
+      - spring-tmp:/tmp/spring
+
+  # webpack-dev-server
+  webpack:
+    build: .
+
+    command: ruby ./bin/webpack-dev-server
+
+    ports:
+      - "3035:3035"
+
+    environment:
+      # コンテナの外からも接続できるようにする
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+
+    volumes:
+      - .:/app
+      # node_modulesはイメージにあるものを使う
+      - /app/node_modules
+
+volumes:
+  # Springの一時ファイルを共有するボリューム
+  spring-tmp:
