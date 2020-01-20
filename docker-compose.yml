@@ -18,9 +18,9 @@ services:
       # appコンテナではSpringを無効にする
       - DISABLE_SPRING=1
 # 以下３行追加
-      - DB_USERNAME=root
-      - DB_PASSWORD=xxxxxxxxxx
-      - DB_HOST=docker.for.mac.localhost
+      - DB_USERNAME=$DB_USERNAME
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_HOST=$DB_HOST
       # webpackのアセットをwebpack-dev-serverから取得する
       - WEBPACKER_DEV_SERVER_HOST=webpack
       - WEBPACKER_DEV_SERVER_PUBLIC=localhost:3035

@@ -33,6 +33,8 @@ class UserController < ApplicationController
     if @user.save
       session[:usr] = @user.id
       flash[:msg] = "ユーザーを登録しました"
+      #ユーザ登録確認メール送信
+      NoticeMailer.sendmail_confirm(@user).deliver_now
       redirect_to '/user/index'
     else
       render 'user/new'
